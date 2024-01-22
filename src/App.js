@@ -49,14 +49,15 @@ function App() {
         <Player name={"Player-2"} symbol={"O"} isActive={activePlayer == "O"} />
       </div>
 
-      {/* -- GameBoard -- */}
-      <GameBoard
-        updateGameboard={gameBoardInputHandler}
-        gameTurns = {gameTurns}
-      />
-
-      {/* -- Logger -- */}
-      <Logger/>
+      <div className="game-logger">
+        {/* -- GameBoard -- */}
+        <GameBoard
+          updateGameboard={gameBoardInputHandler}
+          gameTurns = {gameTurns}
+        />
+        {/* -- Logger -- */}
+        <Logger turns={gameTurns}/>
+      </div>
     </div>
   );
 }

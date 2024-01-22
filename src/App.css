@@ -86,7 +86,6 @@ ol {
   width: fit-content;
   border-radius: 1rem;
   padding: 2rem 2rem;
-  margin-inline: auto;
   list-style-type: none;
 
 }
@@ -103,4 +102,28 @@ ol {
   margin: 0.5rem 0.5rem;
   font-size: 50px;
   font-weight: 600;
+}
+
+/* ---- Logger ---- */
+#logger_shell{
+  color: #283618;
+  border: 2px solid #283618;
+  border-radius: 1rem ;
+  min-width: 20vw;
+  padding: 1rem 1rem;
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+#logger_shell li{
+  display: block;
+  transition: ease-in-out 200ms;
+}
+
+/* ---- game-logger ---- */
+
+.game-logger{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
