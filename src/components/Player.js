@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Player({ name, symbol }) {
+export default function Player({ name, symbol, isActive }) {
   const [editState, setEditState] = useState(false);
   const [playerName, setName] = useState(name);
 
@@ -16,9 +16,9 @@ export default function Player({ name, symbol }) {
   function updatePlayerName(event) {
     setName(event.target.value);
   }
-  
+
   return (
-    <div className="player">
+    <div className={isActive?"player highlighted-player" :"player" }>
       <span className="player-info">
         {editState ? (
           <input type="text" className="" value={playerName} onChange={updatePlayerName}/>

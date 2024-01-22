@@ -36,24 +36,25 @@ header {
   justify-content: space-between;
   align-items: center;
 }
-
+.player.highlighted-player{
+  border-color: #BC6C25;
+}
 .player-info {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-
 }
 
-.player-info span, .player-info input{
+.player-info span,
+.player-info input {
   padding: 0.5rem 1rem;
 }
 
-.player-info input{
+.player-info input {
   /* border: 1px solid white; */
   border-radius: 0.25rem;
   background-color: #516d31;
   color: white;
-
 }
 
 .player-symbol {
@@ -69,6 +70,37 @@ header {
   border-radius: 0.5rem;
 }
 
-.player button:hover{
-  background-color: #BC6C25;
+.player button:hover {
+  background-color: #bc6c25;
+}
+
+/* ---- Game Board ---- */
+
+ol {
+  padding: 0 0;
+  vertical-align: middle;
+}
+
+.game-board {
+  background-color: #283618;
+  width: fit-content;
+  border-radius: 1rem;
+  padding: 2rem 2rem;
+  margin-inline: auto;
+  list-style-type: none;
+
+}
+
+.game-board li {
+  display: inline;
+  vertical-align: middle;
+
+}
+
+.game-board button {
+  width: 7rem;
+  height: 7rem;
+  margin: 0.5rem 0.5rem;
+  font-size: 50px;
+  font-weight: 600;
 }
