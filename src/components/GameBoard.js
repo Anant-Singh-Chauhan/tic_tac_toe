@@ -1,38 +1,17 @@
-import { useState } from "react";
-
 const initialGameBoard = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
 ];
 
-export default function GameBoard({activePlayerSymbol,onUpdateActivePlayer}) {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
+export default function GameBoard({updateGameboard, gameTurns}) {
+let gameBoard = initialGameBoard;
 
-  function updateGameboard(rowIndex, colIndex) {
-    setGameBoard((prevGameboard) => {
-      ///
-      /// not good approach, as we should not alter the reference
-      /// variables diretly, as it could casue issues in app
-      /// some other setState update is scheduled.
-      ///
-
-      //   prevGameboard[rowIndex][colIndex] = "X";
-      //   return prevGameboard;
-
-      ///
-      /// instead update the reference types in an immutable way
-      /// using a deep copy
-      ///
-
-      const updatedBoard = [...prevGameboard.map((innerRow) => [...innerRow])];
-      updatedBoard[rowIndex][colIndex] = activePlayerSymbol;
-      return updatedBoard;
-    });
-
-    onUpdateActivePlayer();
-
-  }
+for (const itr of gameTurns) {
+    const {square, player} = itr;
+    const {row,col} = square;
+    gameBoard[row][col] = player;
+}
 
   return (
     <ol className="game-board">
