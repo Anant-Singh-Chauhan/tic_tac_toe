@@ -4,7 +4,7 @@ export default function Logger({ turns }) {
   return (
     <ol id="logger_shell">
         <div>
-            <h2>Play Logs</h2>
+            <h2>Play Logs :</h2>
         </div>
       {turns.map((turn) => (
         <li
