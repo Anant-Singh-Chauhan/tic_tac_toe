@@ -6,37 +6,44 @@ import GameBoard from "./components/GameBoard";
 import Logger from "./components/Logger";
 
 function App() {
-  const [activePlayer, setActivePlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
 
-  function updateActivePlayer() {
-    setActivePlayer((prevActivePlayer) =>
-      prevActivePlayer == "X" ? "O" : "X"
-    );
-  }
-
-  function gameBoardInputHandler(rowIndex, colIndex){
-   
-    let selectedPlayer = 'X';
-    setGameTurns(prevGameTurns => {
-
-      // done to ensure change of player, 
+  ///
+  /// function to derive active player from gameTurns state
+  /// : Done to avoid unnecessary state
+  ///
+  function deriveActivePlayer(gameTurns){
+    // done to ensure change of player,
       // irrespective of state dependency
-      if(prevGameTurns.length>0 && prevGameTurns[0].player==='X'){
-        selectedPlayer = 'O';
+      let selectedPlayer = "X";
+
+      if (gameTurns.length > 0 && gameTurns[0].player === "X") {
+        selectedPlayer = "O";
       }
 
+      return selectedPlayer;
+  }
+
+
+  ///
+  /// function to handle game board inputs
+  ///
+  function gameBoardInputHandler(rowIndex, colIndex) {
+    setGameTurns((prevGameTurns) => {
+      
+      let selectedPlayer = deriveActivePlayer(gameTurns);
       let inputGameObj = {
-        square : {
-          row : rowIndex, col : colIndex
+        square: {
+          row: rowIndex,
+          col: colIndex,
         },
-        player : selectedPlayer
+        player: selectedPlayer,
       };
-      const updatedGameTurns = [inputGameObj,...prevGameTurns];
-      return updatedGameTurns; 
+      const updatedGameTurns = [inputGameObj, ...prevGameTurns];
+      return updatedGameTurns;
     });
 
-    updateActivePlayer();
+    // updateActivePlayer();
   }
 
   return (
@@ -45,18 +52,18 @@ function App() {
 
       {/* -- InfoBar -- */}
       <div className="infoBar">
-        <Player name={"Player-1"} symbol={"X"} isActive={activePlayer == "X"} />
-        <Player name={"Player-2"} symbol={"O"} isActive={activePlayer == "O"} />
+        <Player name={"Player-1"} symbol={"X"} isActive={deriveActivePlayer(gameTurns) == "X"} />
+        <Player name={"Player-2"} symbol={"O"} isActive={deriveActivePlayer(gameTurns) == "O"} />
       </div>
 
       <div className="game-logger">
         {/* -- GameBoard -- */}
         <GameBoard
           updateGameboard={gameBoardInputHandler}
-          gameTurns = {gameTurns}
+          gameTurns={gameTurns}
         />
         {/* -- Logger -- */}
-        <Logger turns={gameTurns}/>
+        <Logger turns={gameTurns} />
       </div>
     </div>
   );
