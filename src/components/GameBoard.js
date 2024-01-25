@@ -1,14 +1,4 @@
-import { INITIAL_GAMEBOARD as initialGameBoard } from "../commons/Constants";
-
-export default function GameBoard({updateGameboard, gameTurns}) {
-let gameBoard = initialGameBoard;
-
-for (const itr of gameTurns) {
-    const {square, player} = itr;
-    const {row,col} = square;
-    gameBoard[row][col] = player;
-}
-
+export default function GameBoard({ updateGameboard, gameBoard }) {
   return (
     <ol className="game-board">
       {gameBoard.map((row, rowIndex) => (
@@ -16,7 +6,11 @@ for (const itr of gameTurns) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() =>playerSymbol==null && updateGameboard(rowIndex, colIndex)}>
+                <button
+                  onClick={() =>
+                    playerSymbol == null && updateGameboard(rowIndex, colIndex)
+                  }
+                >
                   {playerSymbol}
                 </button>
               </li>

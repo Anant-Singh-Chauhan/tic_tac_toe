@@ -5,6 +5,7 @@ import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Logger from "./components/Logger";
 import { SYMBOLS as PlayerSymbol } from "./commons/Constants";
+import { INITIAL_GAMEBOARD } from "./commons/Constants";
 
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
@@ -43,6 +44,14 @@ function App() {
     });
   }
 
+  let gameBoard = INITIAL_GAMEBOARD;
+
+  for (const itr of gameTurns) {
+    const { square, player } = itr;
+    const { row, col } = square;
+    gameBoard[row][col] = player;
+  }
+
   return (
     <div className="App">
       <Header />
@@ -65,7 +74,7 @@ function App() {
         {/* -- GameBoard -- */}
         <GameBoard
           updateGameboard={gameBoardInputHandler}
-          gameTurns={gameTurns}
+          gameBoard={gameBoard}
         />
         {/* -- Logger -- */}
         <Logger turns={gameTurns} />
