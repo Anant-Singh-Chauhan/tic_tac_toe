@@ -1,8 +1,4 @@
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
+import { INITIAL_GAMEBOARD as initialGameBoard } from "../commons/Constants";
 
 export default function GameBoard({updateGameboard, gameTurns}) {
 let gameBoard = initialGameBoard;

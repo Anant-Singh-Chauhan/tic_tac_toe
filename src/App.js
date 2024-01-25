@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Player from "./components/Player";
 import GameBoard from "./components/GameBoard";
 import Logger from "./components/Logger";
-import { symbol as PlayerSymbol } from "./commons/Constants";
+import { SYMBOLS as PlayerSymbol } from "./commons/Constants";
 
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
