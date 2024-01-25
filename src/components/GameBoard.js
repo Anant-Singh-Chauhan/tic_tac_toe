@@ -20,7 +20,7 @@ for (const itr of gameTurns) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => updateGameboard(rowIndex, colIndex)}>
+                <button onClick={() =>playerSymbol==null && updateGameboard(rowIndex, colIndex)}>
                   {playerSymbol}
                 </button>
               </li>
