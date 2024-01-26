@@ -1,8 +1,14 @@
+header,body{
+  min-width: 480px;
+
+}
+
 /* ---- Header ---- */
 header {
   color: #283618;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .header_img {
