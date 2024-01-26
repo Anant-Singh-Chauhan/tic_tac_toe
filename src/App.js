@@ -137,7 +137,7 @@ function App() {
 
       <div className="game-logger">
         {/* -- GameBoard -- */}
-        <div>
+        <div className="gameBoard-gameOver">
           <GameBoard
             updateGameboard={gameBoardInputHandler}
             gameBoard={gameBoard}
