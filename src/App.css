@@ -84,7 +84,7 @@ ol {
   vertical-align: middle;
 }
 
-.game-board {
+.game-board, .gameOver-shell {
   background-color: #283618;
   /* width: fit-content; */
   min-width: 24rem; 
@@ -131,4 +131,44 @@ ol {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+}
+
+/* ---- gameOver ---- */
+.gameOver-shell{
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 24rem; 
+  height: 24rem;
+  transform: translate(0,-29rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameOver-title{
+  color: #bc6c25;
+  font-size: xx-large;
+  font-weight: 800;
+}
+
+.gameOver-body{
+  color: #dda15e;
+  font-size: x-large;
+  font-weight: 600;
+  margin: 1rem 1rem;
+
+}
+
+.gameOver-rematch{
+  border: 2px solid #bc6c25 ;
+  border-radius: 0.25rem;
+  color: #bc6c25;
+  background-color: transparent;
+  padding: 0.5rem 0.5rem;
+  margin: 1rem 1rem;
+}
+
+.gameOver-rematch:hover{
+  background-color: #dda15e;
+  color: #fefae0;
 }
