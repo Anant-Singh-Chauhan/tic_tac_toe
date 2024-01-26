@@ -9,6 +9,7 @@ import {
   SYMBOLS as PlayerSymbol,
   INITIAL_GAMEBOARD,
   WINNING_COMBINATIONS,
+  INITIAL_PLAYER_NAMES,
 } from "./commons/Constants";
 
 ///
@@ -27,16 +28,71 @@ function deriveActivePlayer(gameTurns) {
   return selectedPlayer;
 }
 
+///
+/// function to derive winner
+///
+function deriveWinner(gameBoard) {
+  let winner;
+
+  // check for winning conditions
+  WINNING_COMBINATIONS.forEach((element) => {
+    const firstSymbol = gameBoard[element[0].row][element[0].col];
+    const secondSymbol = gameBoard[element[1].row][element[1].col];
+    const thirdSymbol = gameBoard[element[2].row][element[2].col];
+
+    if (
+      firstSymbol &&
+      firstSymbol === secondSymbol &&
+      firstSymbol === thirdSymbol
+    )
+      winner = firstSymbol;
+  });
+  return winner;
+}
+
+///
+/// function to derive gameboard
+///
+function deriveGameboard(gameTurns) {
+  // need to use deep copy here
+  let gameBoard = [...INITIAL_GAMEBOARD.map((arr) => [...arr])];
+
+  for (const itr of gameTurns) {
+    const { square, player } = itr;
+    const { row, col } = square;
+    gameBoard[row][col] = player;
+  }
+
+  return gameBoard;
+}
+
 function App() {
   const [gameTurns, setGameTurns] = useState([]);
+  const [players, setPlayers] = useState(INITIAL_PLAYER_NAMES);
+
   const activePlayer = deriveActivePlayer(gameTurns);
   const isDraw = gameTurns.length === 9;
+  const gameBoard = deriveGameboard(gameTurns);
+
+  const winner = deriveWinner(gameBoard);
 
   ///
   /// Reset Gameboard
   ///
-  function resetGameboard(){
+  function resetGameboard() {
     setGameTurns([]);
+  }
+
+  ///
+  /// function to update Player Names
+  ///
+  function updatePlayer(playerSymbol, playerName) {
+    setPlayers((prevState) => {
+      return {
+        ...prevState,
+        [playerSymbol]: playerName,
+      };
+    });
   }
 
   ///
@@ -57,29 +113,7 @@ function App() {
     });
   }
 
-  // need to use deep copy here
-  let gameBoard = [...INITIAL_GAMEBOARD.map(arr => [...arr])];
-  let winner;
 
-  for (const itr of gameTurns) {
-    const { square, player } = itr;
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
-
-  // check for winning conditions
-  WINNING_COMBINATIONS.forEach((element) => {
-    const firstSymbol = gameBoard[element[0].row][element[0].col];
-    const secondSymbol = gameBoard[element[1].row][element[1].col];
-    const thirdSymbol = gameBoard[element[2].row][element[2].col];
-
-    if (
-      firstSymbol &&
-      firstSymbol === secondSymbol &&
-      firstSymbol === thirdSymbol
-    )
-      winner = firstSymbol;
-  });
 
   return (
     <div className="App">
@@ -88,14 +122,16 @@ function App() {
       {/* -- InfoBar -- */}
       <div className="infoBar">
         <Player
-          name={"Player-1"}
+          name={players.X}
           symbol={PlayerSymbol.X}
           isActive={activePlayer === PlayerSymbol.X}
+          onSave={updatePlayer}
         />
         <Player
-          name={"Player-2"}
-          symbol={"O"}
+          name={players.O}
+          symbol={PlayerSymbol.O}
           isActive={activePlayer === PlayerSymbol.O}
+          onSave={updatePlayer}
         />
       </div>
 
@@ -108,7 +144,12 @@ function App() {
           />
 
           {/* -- Game Over -- */}
-          {(winner || isDraw) ? <GameOver winner={winner} onClickRematch={resetGameboard}/> : null}
+          {winner || isDraw ? (
+            <GameOver
+              winner={players[winner]}
+              onClickRematch={resetGameboard}
+            />
+          ) : null}
         </div>
         {/* -- Logger -- */}
         <Logger turns={gameTurns} />

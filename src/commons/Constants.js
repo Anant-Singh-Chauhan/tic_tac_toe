@@ -55,3 +55,9 @@ export const INITIAL_GAMEBOARD = [
   [null, null, null],
   [null, null, null],
 ];
+
+// Initial Player Names
+export const INITIAL_PLAYER_NAMES = {
+    "X": "Player 1",
+    "O": "Player 2"
+  }
