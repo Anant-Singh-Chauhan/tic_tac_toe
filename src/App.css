@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
+
+
 header,body{
   min-width: 480px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.App{
+  padding: 1rem 1rem;
 
 }
 
