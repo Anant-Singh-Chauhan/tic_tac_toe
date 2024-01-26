@@ -53,7 +53,7 @@ Web View
 ![ss_web](./screenshots/ss_web.png)
 
 
-For a live demo, visit Tic Tac Toe Demo.
+For a live demo, visit https://anant-singh-chauhan.github.io/tic_tac_toe/.
 
 ## Contributing
 
