@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap");
 
-
-header,body{
+header,
+body {
   min-width: 480px;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
-.App{
+.App {
   padding: 1rem 1rem;
-
 }
 
 /* ---- Header ---- */
@@ -29,6 +28,31 @@ header {
   width: 10.2rem;
 }
 
+/* ---- Menu ---- */
+#menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #283618;
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+  align-items: center;
+}
+
+#menu button {
+  margin-block: 1rem;
+  background-color: #dda15e;
+  font-size: 2rem;
+  color: white;
+  height: 4rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+#menu button:hover {
+  background-color: #bc6c25;
+}
+
 /* ---- InfoBar ---- */
 
 .infoBar {
@@ -38,12 +62,13 @@ header {
 
   display: flex;
   flex-wrap: wrap;
-  min-width: 24rem; 
+  min-width: 24rem;
 
   justify-content: space-evenly;
 }
 
-.player {
+.player,
+.form-field {
   color: #fefae0;
   border: 2px solid #fefae0;
   padding: 0.5rem 1rem;
@@ -53,8 +78,8 @@ header {
   justify-content: space-between;
   align-items: center;
 }
-.player.highlighted-player{
-  border-color: #BC6C25;
+.player.highlighted-player {
+  border-color: #bc6c25;
 }
 .player-info {
   display: flex;
@@ -78,7 +103,8 @@ header {
   font-size: larger;
   color: #dda15e;
 }
-.player button {
+.player button,
+.form-submit {
   margin-inline: 1rem;
   background-color: #dda15e;
   color: white;
@@ -87,8 +113,41 @@ header {
   border-radius: 0.5rem;
 }
 
-.player button:hover {
+.player button:hover,
+.form-submit:hover {
   background-color: #bc6c25;
+}
+
+/* ---- Form Fields ---- */
+.remote-menu {
+  padding: 2rem 2rem;
+}
+
+.remote-form {
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+input.form-field  {
+  color: #283618;
+  font-size: 1.5rem;
+}
+
+.form-field,
+.form-submit {
+  /* margin: 0.75rem 1rem; */
+  width: 65vw;
+  max-width: 20rem;
+}
+
+.form-submit {
+  max-width: 22rem;
+  height: 3rem;
+  font-size: 1.5rem;
+}
+.form-submit:disabled{
+  opacity: 0.3;
 }
 
 /* ---- Game Board ---- */
@@ -98,20 +157,19 @@ ol {
   vertical-align: middle;
 }
 
-.game-board, .gameOver-shell {
+.game-board,
+.gameOver-shell {
   background-color: #283618;
   /* width: fit-content; */
-  min-width: 24rem; 
+  min-width: 24rem;
   border-radius: 1rem;
   padding: 2rem 2rem;
   list-style-type: none;
-
 }
 
 .game-board li {
   display: inline;
   vertical-align: middle;
-
 }
 
 .game-board button {
@@ -123,24 +181,24 @@ ol {
 }
 
 /* ---- Logger ---- */
-#logger_shell{
+#logger_shell {
   color: #283618;
   border: 2px solid #283618;
-  border-radius: 1rem ;
+  border-radius: 1rem;
   min-width: 16rem;
   padding: 1rem 1rem;
   max-height: 20rem;
   overflow-y: auto;
 }
 
-#logger_shell li{
+#logger_shell li {
   display: block;
   transition: ease-in-out 200ms;
 }
 
 /* ---- game-logger ---- */
 
-.game-logger{
+.game-logger {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -149,39 +207,37 @@ ol {
 }
 
 /* ---- gameOver ---- */
-.gameBoard-gameOver{
+.gameBoard-gameOver {
   height: 29rem;
   overflow-y: hidden;
-
 }
-.gameOver-shell{
+.gameOver-shell {
   background-color: rgba(0, 0, 0, 0.9);
-  width: 24rem; 
+  width: 24rem;
   height: 24rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  top: -29rem
+  top: -29rem;
 }
 
-.gameOver-title{
+.gameOver-title {
   color: #bc6c25;
   font-size: xx-large;
   font-weight: 800;
 }
 
-.gameOver-body{
+.gameOver-body {
   color: #dda15e;
   font-size: x-large;
   font-weight: 600;
   margin: 1rem 1rem;
-
 }
 
-.gameOver-rematch{
-  border: 2px solid #bc6c25 ;
+.gameOver-rematch {
+  border: 2px solid #bc6c25;
   border-radius: 0.25rem;
   color: #bc6c25;
   background-color: transparent;
@@ -189,7 +245,7 @@ ol {
   margin: 1rem 1rem;
 }
 
-.gameOver-rematch:hover{
+.gameOver-rematch:hover {
   background-color: #dda15e;
   color: #fefae0;
 }
