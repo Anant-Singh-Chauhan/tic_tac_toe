@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Switch from "react-switch";
-// import socketClient from "../server";
+import socketClient from "../socket/socket";
 
 const initialPlayerName = "Enter Player Name";
 const initialRoomId = "Enter Room ID";
@@ -35,6 +35,16 @@ export default function RemoteMenu() {
     setRoomId(event.target.value);
   }
 
+  //
+  function submitHandler() {
+
+    socketClient.connect();
+
+    if(!isPrivateRoom){
+        socketClient.emit("add-random-player", playerName);
+    };
+    // socketClient.emit("add-remote-player", playerName);
+  }
   return (
     <div className="remote-menu">
       <div className="infoBar remote-form">
@@ -75,12 +85,15 @@ export default function RemoteMenu() {
           disabled={!(isPrivateRoom && hasRoomId)}
           value={roomId}
           onChange={updateRoomId}
-
         />
 
-        <button className="form-submit" disabled={playerName==="" || (hasRoomId && roomId === "")} onClick={()=>{
-            console.log("submit clicked")
-        }}>Check For Players</button>
+        <button
+          className="form-submit"
+          disabled={playerName === "" || (hasRoomId && roomId === "")}
+          onClick={submitHandler}
+        >
+          Check For Players
+        </button>
       </div>
     </div>
   );
