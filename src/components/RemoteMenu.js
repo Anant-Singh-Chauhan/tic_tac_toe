@@ -43,7 +43,6 @@ export default function RemoteMenu() {
     if(!isPrivateRoom){
         socketClient.emit("add-random-player", playerName);
     };
-    // socketClient.emit("add-remote-player", playerName);
   }
   return (
     <div className="remote-menu">
