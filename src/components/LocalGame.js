@@ -119,6 +119,7 @@ export default function LocalGame() {
       players : players,
       updatePlayer : updatePlayer
     }
+    
   return (
     <PlayersContext.Provider value={ctxValuePlayer}>
         {/* -- InfoBar -- */}

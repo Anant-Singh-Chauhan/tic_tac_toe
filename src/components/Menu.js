@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react';
+import { RemoteContext } from '../store/remote-context';
 
-export default function Menu({menuHandler}) {
+export default function Menu() {
+  const { updateIsLocal } = useContext(RemoteContext);
   return (
     <div id="menu">
-        <div><button onClick={() => menuHandler(true)}>Local</button></div>
-        <div><button onClick={() => menuHandler(false)}>Remote</button></div>
+        <div><button onClick={() => updateIsLocal(true)}>Local</button></div>
+        <div><button onClick={() => updateIsLocal(false)}>Remote</button></div>
     </div>
   )
 }
