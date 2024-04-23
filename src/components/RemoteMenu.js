@@ -8,7 +8,7 @@ const initialRoomId = "Enter Room ID";
 
 //
 export default function RemoteMenu() {
-  const { updateConnectionSuccess } = useContext(RemoteContext);
+  const { updateConnectionSuccess, updateRemoteRoomId } = useContext(RemoteContext);
 
   const [playerName, setPlayerName] = useState("");
   const [roomId, setRoomId] = useState("");
@@ -40,20 +40,25 @@ export default function RemoteMenu() {
 
   //
   function submitHandler() {
-    
     try {
-      socketClient.connect({autoConnect: false});
+      socketClient.connect({ autoConnect: false });
 
-      // Add Random Player 
+      // Add Random Player
       if (!isPrivateRoom) {
         console.log("calling add random player");
         socketClient.emit("add-random-player", playerName);
       }
       updateConnectionSuccess(socketClient.active);
 
+      //
+      // handle game start
+      socketClient.on("emit-game-start", (gamePackage) => {
+        console.log(`game started!`);
+        updateRemoteRoomId(gamePackage["gameRoomId"]);
+        console.log(gamePackage);
+      });
     } catch (ex) {
       console.log(ex);
-
     }
   }
   return (

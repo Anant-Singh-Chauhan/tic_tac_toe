@@ -25,10 +25,10 @@ function App() {
   const remoteContextValue = {
     isLocal: isLocal,
     connectionSuccess: connectionSuccess,
-    roomId: undefined,
+    roomId: roomId,
     updateIsLocal: setIsLocal,
     updateConnectionSuccess: setConnectionSuccess,
-    updateRoomId : setRoomId
+    updateRemoteRoomId : setRoomId
   };
 
   return (

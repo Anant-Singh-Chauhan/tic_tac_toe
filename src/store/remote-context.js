@@ -6,5 +6,5 @@ export const RemoteContext = createContext({
   roomId: undefined,
   updateIsLocal: ()=>{},
   updateConnectionSuccess : ()=>{},
-  updateRoomId : ()=>{}
+  updateRemoteRoomId : ()=>{}
 });
