@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Logger({ turns }) {
   return (
-    <ol id="logger_shell">
+    <ol id="logger_shell" className="logger_shell">
         <div>
             <h2>Play Logs :</h2>
         </div>

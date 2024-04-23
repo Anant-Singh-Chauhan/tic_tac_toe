@@ -181,7 +181,7 @@ ol {
 }
 
 /* ---- Logger ---- */
-#logger_shell {
+.logger_shell {
   color: #283618;
   border: 2px solid #283618;
   border-radius: 1rem;
@@ -191,7 +191,7 @@ ol {
   overflow-y: auto;
 }
 
-#logger_shell li {
+.logger_shell li {
   display: block;
   transition: ease-in-out 200ms;
 }

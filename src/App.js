@@ -15,6 +15,13 @@ function App() {
     setIsLocal(isLocalSelected);
   }
 
+  function showRemoteGameboardHandler(val, exMsg) {
+    if(val === false) alert("Remote Connection Failed!, Something Went Wrong : " + exMsg);
+    else alert("Finding Players!");
+    
+    setShowRemoteGameboard(val);
+  }
+
   return (
     <div className="App">
       <Header />
@@ -25,7 +32,7 @@ function App() {
       ) : isLocal === true ? (
         <LocalGame />
       ) : !showRemoteGameboard ? (
-        <RemoteMenu />
+        <RemoteMenu remoteCallHandler={showRemoteGameboardHandler}/>
       ) : (
         <RemoteGame />
       )}

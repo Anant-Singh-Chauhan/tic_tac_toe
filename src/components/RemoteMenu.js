@@ -6,7 +6,7 @@ const initialPlayerName = "Enter Player Name";
 const initialRoomId = "Enter Room ID";
 
 //
-export default function RemoteMenu() {
+export default function RemoteMenu({ remoteCallHandler }) {
   const [playerName, setPlayerName] = useState("");
   const [roomId, setRoomId] = useState("");
 
@@ -37,12 +37,21 @@ export default function RemoteMenu() {
 
   //
   function submitHandler() {
+    try {
+      socketClient.connect();
 
-    socketClient.connect();
-
-    if(!isPrivateRoom){
+      // Add Random Player 
+      if (!isPrivateRoom) {
+        console.log("calling add random player");
         socketClient.emit("add-random-player", playerName);
-    };
+      }
+
+      var flag = true;
+
+      remoteCallHandler(flag);
+    } catch (ex) {
+      remoteCallHandler(false, ex)
+    }
   }
   return (
     <div className="remote-menu">
