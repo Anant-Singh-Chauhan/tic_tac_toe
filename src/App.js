@@ -7,7 +7,6 @@ import RemoteMenu from "./components/RemoteMenu";
 import RemoteGame from "./components/RemoteGame";
 
 function App() {
-  // socketClient.emit("add-player","");
   const [isLocal, setIsLocal] = useState(undefined);
   const [showRemoteGameboard, setShowRemoteGameboard] = useState(false);
 

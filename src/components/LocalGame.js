@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import {useState} from 'react';
+import { PlayersContext } from '../store/players-context';
 import Player from "./Player";
 import GameBoard from "./GameBoard";
 import GameOver from "./GameOver";
@@ -68,13 +69,13 @@ import {
 export default function LocalGame() {
     const [gameTurns, setGameTurns] = useState([]);
     const [players, setPlayers] = useState(INITIAL_PLAYER_NAMES);
-  
+
     const activePlayer = deriveActivePlayer(gameTurns);
     const isDraw = gameTurns.length === 9;
     const gameBoard = deriveGameboard(gameTurns);
   
     const winner = deriveWinner(gameBoard);
-  
+
     ///
     /// Reset Gameboard
     ///
@@ -113,21 +114,24 @@ export default function LocalGame() {
       });
     }
 
+    // player context value
+    const ctxValuePlayer = {
+      players : players,
+      updatePlayer : updatePlayer
+    }
   return (
-    <div>
+    <PlayersContext.Provider value={ctxValuePlayer}>
         {/* -- InfoBar -- */}
       <div className="infoBar">
         <Player
-          name={players.X}
           symbol={PlayerSymbol.X}
           isActive={activePlayer === PlayerSymbol.X}
-          onSave={updatePlayer}
+          isEditable={true}
         />
         <Player
-          name={players.O}
           symbol={PlayerSymbol.O}
           isActive={activePlayer === PlayerSymbol.O}
-          onSave={updatePlayer}
+          isEditable={true}
         />
       </div>
 
@@ -150,6 +154,6 @@ export default function LocalGame() {
         {/* -- Logger -- */}
         <Logger turns={gameTurns} />
       </div>
-    </div>
+    </PlayersContext.Provider>
   )
 }
