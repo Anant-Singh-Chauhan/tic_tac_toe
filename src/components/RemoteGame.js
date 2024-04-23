@@ -68,7 +68,7 @@ function deriveGameboard(gameTurns) {
 export default function RemoteGame({ playersObj, roomId }) {
   const [gameTurns, setGameTurns] = useState([]);
   const [players, setPlayers] = useState(INITIAL_PLAYER_NAMES);
-  const [gameLogs, setGameLogs] = useState([]);
+  // const [gameLogs, setGameLogs] = useState([]);
 
   const activePlayer = deriveActivePlayer(gameTurns);
   const isDraw = gameTurns.length === 9;

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { RemoteContext } from "../store/remote-context";
 import Switch from "react-switch";
 import socketClient from "../socket/socket";
 
@@ -6,7 +7,9 @@ const initialPlayerName = "Enter Player Name";
 const initialRoomId = "Enter Room ID";
 
 //
-export default function RemoteMenu({ remoteCallHandler }) {
+export default function RemoteMenu() {
+  const { updateConnectionSuccess } = useContext(RemoteContext);
+
   const [playerName, setPlayerName] = useState("");
   const [roomId, setRoomId] = useState("");
 
@@ -37,6 +40,7 @@ export default function RemoteMenu({ remoteCallHandler }) {
 
   //
   function submitHandler() {
+    
     try {
       socketClient.connect();
 
@@ -45,12 +49,11 @@ export default function RemoteMenu({ remoteCallHandler }) {
         console.log("calling add random player");
         socketClient.emit("add-random-player", playerName);
       }
+      updateConnectionSuccess(socketClient.connected);
 
-      var flag = true;
-
-      remoteCallHandler(flag);
     } catch (ex) {
-      remoteCallHandler(false, ex)
+      console.log(ex);
+
     }
   }
   return (
