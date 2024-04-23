@@ -42,14 +42,14 @@ export default function RemoteMenu() {
   function submitHandler() {
     
     try {
-      socketClient.connect();
+      socketClient.connect({autoConnect: false});
 
       // Add Random Player 
       if (!isPrivateRoom) {
         console.log("calling add random player");
         socketClient.emit("add-random-player", playerName);
       }
-      updateConnectionSuccess(socketClient.connected);
+      updateConnectionSuccess(socketClient.active);
 
     } catch (ex) {
       console.log(ex);

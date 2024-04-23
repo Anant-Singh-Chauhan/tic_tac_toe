@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RemoteContext } from "./store/remote-context";
-import { CirclesWithBar } from "react-loader-spinner";
-import LocalGame from "./components/LocalGame";
+import { ProgressBar } from "react-loader-spinner";
+import Game from "./components/Game";
 import "./App.css";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
@@ -11,6 +11,7 @@ import RemoteGame from "./components/RemoteGame";
 function App() {
   const [isLocal, setIsLocal] = useState(undefined);
   const [connectionSuccess, setConnectionSuccess] = useState(undefined);
+  const [roomId, setRoomId] = useState(undefined);
   const [showRemoteGameboard, setShowRemoteGameboard] = useState(false);
 
   function showRemoteGameboardHandler(val, exMsg) {
@@ -24,9 +25,10 @@ function App() {
   const remoteContextValue = {
     isLocal: isLocal,
     connectionSuccess: connectionSuccess,
-    roomId: "",
+    roomId: undefined,
     updateIsLocal: setIsLocal,
     updateConnectionSuccess: setConnectionSuccess,
+    updateRoomId : setRoomId
   };
 
   return (
@@ -35,27 +37,27 @@ function App() {
       <RemoteContext.Provider value={remoteContextValue}>
         {/* Main Menu */}
 
-        {isLocal === undefined ? (
-          <Menu />
-        ) : isLocal === false && connectionSuccess === undefined ? (
-          <RemoteMenu />
-        ) : isLocal === false && connectionSuccess === false ? (
-          <CirclesWithBar
-            height="100"
-            width="100"
-            color="#4fa94d"
-            outerCircleColor="#4fa94d"
-            innerCircleColor="#4fa94d"
-            barColor="#4fa94d"
-            ariaLabel="circles-with-bar-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
+        {isLocal === undefined && <Menu />}
+
+        {/* --Local Game-- */}
+        {isLocal && <Game/>}
+
+        {/* -- Remote Menu -- */}
+        {isLocal === false && connectionSuccess === undefined && <RemoteMenu />}
+        {isLocal === false && connectionSuccess === true && roomId == undefined && (
+          <ProgressBar
+          visible={true}
+          height="100"
+          width="100"
+          color="#4fa94d"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
           />
-        ) : (
-          <LocalGame />
         )}
 
+        {/* -- Remote Game -- */}
+        {(isLocal === false && connectionSuccess === true && roomId != undefined ) && <Game />}
       </RemoteContext.Provider>
     </div>
   );

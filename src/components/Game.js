@@ -1,9 +1,10 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import { PlayersContext } from '../store/players-context';
 import Player from "./Player";
 import GameBoard from "./GameBoard";
 import GameOver from "./GameOver";
 import Logger from "./Logger";
+import { RemoteContext } from '../store/remote-context';
 
 import {
     SYMBOLS as PlayerSymbol,
@@ -66,7 +67,9 @@ import {
     return gameBoard;
   }
 
-export default function LocalGame() {
+export default function Game() {
+    const {isLocal} = useContext(RemoteContext);
+
     const [gameTurns, setGameTurns] = useState([]);
     const [players, setPlayers] = useState(INITIAL_PLAYER_NAMES);
 
@@ -127,12 +130,12 @@ export default function LocalGame() {
         <Player
           symbol={PlayerSymbol.X}
           isActive={activePlayer === PlayerSymbol.X}
-          isEditable={true}
+          isEditable={isLocal}
         />
         <Player
           symbol={PlayerSymbol.O}
           isActive={activePlayer === PlayerSymbol.O}
-          isEditable={true}
+          isEditable={isLocal}
         />
       </div>
 
