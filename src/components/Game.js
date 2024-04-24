@@ -71,7 +71,8 @@ function deriveGameboard(gameTurns) {
 }
 
 export default function Game() {
-  const { isLocal, roomId, remotePlayers, nativePlayer } = useContext(RemoteContext);
+  const { isLocal, roomId, remotePlayers, nativePlayer } =
+    useContext(RemoteContext);
 
   const [players, setPlayers] = useState(
     remotePlayers != undefined ? remotePlayers : INITIAL_PLAYER_NAMES
@@ -88,7 +89,7 @@ export default function Game() {
       console.log(updatedGameTurns);
       setGameTurns(updatedGameTurns);
     });
-  },[]);
+  }, []);
 
   const activePlayer = deriveActivePlayer(gameTurns);
   const isDraw = gameTurns.length === 9;
@@ -164,16 +165,26 @@ export default function Game() {
             isActive={activePlayer === PlayerSymbol.O}
             isEditable={isLocal}
           />
-          {roomId != undefined && <h3>Room Id : {roomId}
-          </h3>}
-          <p>Waiting for {players[activePlayer]}'s turn</p>
+
+          {roomId != undefined && (
+            <div className="remote-info">
+              <h3>
+                Room Id : {roomId}
+              </h3>
+                <p>Waiting for <strong>{players[activePlayer]}</strong>'s turn</p>
+            </div>
+          )}
         </div>
       </PlayersContext.Provider>
 
       <div className="game-logger">
         {/* -- GameBoard -- */}
         {/* <GameContext.Provider value={ctxValueGame}> */}
-        <div className={`gameBoard-gameOver ${nativePlayer == players[activePlayer] ? "disabled" :""}`} >
+        <div
+          className={`gameBoard-gameOver ${
+            nativePlayer == players[activePlayer] ? "disabled" : ""
+          }`}
+        >
           <GameBoard
             updateGameboard={gameBoardInputHandler}
             gameBoard={gameBoard}
