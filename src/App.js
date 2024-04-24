@@ -28,7 +28,7 @@ function App() {
     roomId: roomId,
     updateIsLocal: setIsLocal,
     updateConnectionSuccess: setConnectionSuccess,
-    updateRemoteRoomId : setRoomId
+    updateRemoteRoomId: setRoomId,
   };
 
   return (
@@ -40,24 +40,29 @@ function App() {
         {isLocal === undefined && <Menu />}
 
         {/* --Local Game-- */}
-        {isLocal && <Game/>}
+        {isLocal && <Game />}
 
         {/* -- Remote Menu -- */}
         {isLocal === false && connectionSuccess === undefined && <RemoteMenu />}
-        {isLocal === false && connectionSuccess === true && roomId == undefined && (
-          <ProgressBar
-          visible={true}
-          height="100"
-          width="100"
-          color="#4fa94d"
-          ariaLabel="progress-bar-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          />
-        )}
+
+        {isLocal === false &&
+          connectionSuccess === true &&
+          roomId == undefined && (
+            <ProgressBar
+              visible={true}
+              height="100"
+              width="100"
+              color="#4fa94d"
+              ariaLabel="progress-bar-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          )}
 
         {/* -- Remote Game -- */}
-        {(isLocal === false && connectionSuccess === true && roomId != undefined ) && <Game />}
+        {isLocal === false &&
+          connectionSuccess === true &&
+          roomId != undefined && <Game />}
       </RemoteContext.Provider>
     </div>
   );

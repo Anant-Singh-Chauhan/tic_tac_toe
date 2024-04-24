@@ -68,7 +68,7 @@ import {
   }
 
 export default function Game() {
-    const {isLocal} = useContext(RemoteContext);
+    const {isLocal, roomId} = useContext(RemoteContext);
 
     const [gameTurns, setGameTurns] = useState([]);
     const [players, setPlayers] = useState(INITIAL_PLAYER_NAMES);
@@ -137,6 +137,7 @@ export default function Game() {
           isActive={activePlayer === PlayerSymbol.O}
           isEditable={isLocal}
         />
+        {roomId != undefined && <h3>Room Id : {roomId}</h3>}
       </div>
 
       <div className="game-logger">

@@ -4,7 +4,11 @@ export const RemoteContext = createContext({
   isLocal: undefined,
   connectionSuccess : undefined,
   roomId: undefined,
+  players : {},
+  gameTurns : [],
   updateIsLocal: ()=>{},
   updateConnectionSuccess : ()=>{},
-  updateRemoteRoomId : ()=>{}
+  updateRemoteRoomId : ()=>{},
+  updatePlayers : ()=>{},
+  updateGameTurns : ()=>{}
 });
