@@ -8,7 +8,7 @@ const initialRoomId = "Enter Room ID";
 
 //
 export default function RemoteMenu() {
-  const { updateConnectionSuccess, updateRemoteRoomId, updateRemotePlayers } =
+  const { updateConnectionSuccess, updateRemoteRoomId, updateRemotePlayers, updateNativePlayer } =
     useContext(RemoteContext);
 
   const [playerName, setPlayerName] = useState("");
@@ -59,6 +59,9 @@ export default function RemoteMenu() {
         ///
         /// updating remote context
         ///
+
+        // updating native Player
+        updateNativePlayer(playerName);
 
         // updating remote room id
         updateRemoteRoomId(gamePackage["gameRoomId"]);

@@ -211,6 +211,11 @@ ol {
   height: 29rem;
   overflow-y: hidden;
 }
+
+.gameBoard-gameOver.disabled{
+  pointer-events: none;
+}
+
 .gameOver-shell {
   background-color: rgba(0, 0, 0, 0.9);
   width: 24rem;

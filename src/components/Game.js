@@ -71,7 +71,7 @@ function deriveGameboard(gameTurns) {
 }
 
 export default function Game() {
-  const { isLocal, roomId, remotePlayers } = useContext(RemoteContext);
+  const { isLocal, roomId, remotePlayers, nativePlayer } = useContext(RemoteContext);
 
   const [players, setPlayers] = useState(
     remotePlayers != undefined ? remotePlayers : INITIAL_PLAYER_NAMES
@@ -171,7 +171,7 @@ export default function Game() {
       <div className="game-logger">
         {/* -- GameBoard -- */}
         {/* <GameContext.Provider value={ctxValueGame}> */}
-        <div className="gameBoard-gameOver">
+        <div className={`gameBoard-gameOver ${nativePlayer == players[activePlayer] ? "disabled" :""}`} >
           <GameBoard
             updateGameboard={gameBoardInputHandler}
             gameBoard={gameBoard}
