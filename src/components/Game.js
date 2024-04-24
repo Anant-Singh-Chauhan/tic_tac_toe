@@ -164,7 +164,9 @@ export default function Game() {
             isActive={activePlayer === PlayerSymbol.O}
             isEditable={isLocal}
           />
-          {roomId != undefined && <h3>Room Id : {roomId}</h3>}
+          {roomId != undefined && <h3>Room Id : {roomId}
+          </h3>}
+          <p>Waiting for {players[activePlayer]}'s turn</p>
         </div>
       </PlayersContext.Provider>
 
