@@ -68,10 +68,10 @@ import {
   }
 
 export default function Game() {
-    const {isLocal, roomId} = useContext(RemoteContext);
+    const {isLocal, roomId, remotePlayers} = useContext(RemoteContext);
 
     const [gameTurns, setGameTurns] = useState([]);
-    const [players, setPlayers] = useState(INITIAL_PLAYER_NAMES);
+    const [players, setPlayers] = useState(remotePlayers != undefined?remotePlayers : INITIAL_PLAYER_NAMES);
 
     const activePlayer = deriveActivePlayer(gameTurns);
     const isDraw = gameTurns.length === 9;

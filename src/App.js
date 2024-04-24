@@ -12,6 +12,8 @@ function App() {
   const [isLocal, setIsLocal] = useState(undefined);
   const [connectionSuccess, setConnectionSuccess] = useState(undefined);
   const [roomId, setRoomId] = useState(undefined);
+  const [remotePlayers, setRemotePlayers] = useState(undefined);
+  
   const [showRemoteGameboard, setShowRemoteGameboard] = useState(false);
 
   function showRemoteGameboardHandler(val, exMsg) {
@@ -26,9 +28,11 @@ function App() {
     isLocal: isLocal,
     connectionSuccess: connectionSuccess,
     roomId: roomId,
+    remotePlayers: remotePlayers,
     updateIsLocal: setIsLocal,
     updateConnectionSuccess: setConnectionSuccess,
     updateRemoteRoomId: setRoomId,
+    updateRemotePlayers: setRemotePlayers,
   };
 
   return (

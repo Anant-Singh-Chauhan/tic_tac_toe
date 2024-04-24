@@ -8,7 +8,8 @@ const initialRoomId = "Enter Room ID";
 
 //
 export default function RemoteMenu() {
-  const { updateConnectionSuccess, updateRemoteRoomId } = useContext(RemoteContext);
+  const { updateConnectionSuccess, updateRemoteRoomId, updateRemotePlayers } =
+    useContext(RemoteContext);
 
   const [playerName, setPlayerName] = useState("");
   const [roomId, setRoomId] = useState("");
@@ -54,8 +55,25 @@ export default function RemoteMenu() {
       // handle game start
       socketClient.on("emit-game-start", (gamePackage) => {
         console.log(`game started!`);
+
+        ///
+        /// updating remote context
+        ///
+
+        // updating remote room id
         updateRemoteRoomId(gamePackage["gameRoomId"]);
+
+        // updating players
+        updateRemotePlayers(gamePackage["players"]);
+
+        // updating gameTurns
+
         console.log(gamePackage);
+
+        // // handle join
+        // socketClient.on("join",cb => {
+        //   cb("abcd");
+        // })
       });
     } catch (ex) {
       console.log(ex);
