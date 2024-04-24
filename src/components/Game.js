@@ -88,8 +88,8 @@ export default function Game() {
       console.log(updatedGameTurns);
       setGameTurns(updatedGameTurns);
     });
-  },[gameTurns]);
-  
+  },[]);
+
   const activePlayer = deriveActivePlayer(gameTurns);
   const isDraw = gameTurns.length === 9;
   const gameBoard = deriveGameboard(gameTurns);

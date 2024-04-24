@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, memo } from "react";
 import { PlayersContext } from "../store/players-context";
 
-export default function Player({ symbol, isActive, isEditable = true }) {
+const Player = memo(function Player({ symbol, isActive, isEditable = true }) {
   const {players, updatePlayer} = useContext(PlayersContext);
   const [editState, setEditState] = useState(false);
   const [playerName, setName] = useState(players[symbol]);
@@ -39,4 +39,6 @@ export default function Player({ symbol, isActive, isEditable = true }) {
       </button>}
     </div>
   );
-}
+});
+
+export default Player;
