@@ -12,5 +12,6 @@ export const RemoteContext = createContext({
   updateRemoteRoomId : ()=>{},
   updateRemotePlayers : ()=>{},
   updateGameTurns : ()=>{},
-  updateNativePlayer : ()=>{}
+  updateNativePlayer : ()=>{},
+  resetRemoteContext : ()=>{}
 });

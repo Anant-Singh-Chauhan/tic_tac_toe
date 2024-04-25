@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { PlayersContext } from "../store/players-context";
 import { RemoteContext } from "../store/remote-context";
-import { GameContext } from "../store/game-context";
 import socketClient from "../socket/socket";
 
 import Player from "./Player";
@@ -71,7 +70,7 @@ function deriveGameboard(gameTurns) {
 }
 
 export default function Game() {
-  const { isLocal, roomId, remotePlayers, nativePlayer } =
+  const { isLocal, roomId, remotePlayers, nativePlayer, resetRemoteContext } =
     useContext(RemoteContext);
 
   const [players, setPlayers] = useState(
@@ -89,6 +88,17 @@ export default function Game() {
       console.log(updatedGameTurns);
       setGameTurns(updatedGameTurns);
     });
+
+    ///
+    /// handle player disconnection
+    socketClient.on("player-disconnected", (disconnectedPlayer) => {
+      console.log(
+        `Player disconnected, Name : ${disconnectedPlayer["playerName"]} from room : ${disconnectedPlayer["roomId"]}`
+      );
+      resetRemoteContext();
+    });
+
+
   }, []);
 
   const activePlayer = deriveActivePlayer(gameTurns);

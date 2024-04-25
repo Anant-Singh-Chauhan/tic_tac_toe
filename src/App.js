@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RemoteContext } from "./store/remote-context";
 import { ProgressBar } from "react-loader-spinner";
 import Game from "./components/Game";
@@ -6,24 +6,19 @@ import "./App.css";
 import Header from "./components/Header";
 import Menu from "./components/Menu";
 import RemoteMenu from "./components/RemoteMenu";
-import RemoteGame from "./components/RemoteGame";
+import socketClient from "./socket/socket";
 
 function App() {
+
+
   const [isLocal, setIsLocal] = useState(undefined);
   const [connectionSuccess, setConnectionSuccess] = useState(undefined);
   const [roomId, setRoomId] = useState(undefined);
   const [remotePlayers, setRemotePlayers] = useState(undefined);
   const [nativePlayer, setNativePlayer] = useState(undefined);
+  const {resetRemoteContext} = useContext(RemoteContext);
 
-  const [showRemoteGameboard, setShowRemoteGameboard] = useState(false);
-
-  function showRemoteGameboardHandler(val, exMsg) {
-    if (val === false)
-      alert("Remote Connection Failed!, Something Went Wrong : " + exMsg);
-    else alert("Finding Players!");
-
-    setShowRemoteGameboard(val);
-  }
+ 
 
   const remoteContextValue = {
     isLocal: isLocal,
@@ -36,12 +31,20 @@ function App() {
     updateRemoteRoomId: setRoomId,
     updateRemotePlayers: setRemotePlayers,
     updateNativePlayer: setNativePlayer,
+    resetRemoteContext: () => {
+      setIsLocal(undefined);
+      setConnectionSuccess(undefined);
+      setRoomId(undefined);
+      setNativePlayer(undefined);
+      setRemotePlayers(undefined);
+      socketClient.disconnect();
+    },
   };
 
   return (
     <div className="App">
-      <Header />
       <RemoteContext.Provider value={remoteContextValue}>
+        <Header />
         {/* Main Menu */}
 
         {isLocal === undefined && <Menu />}
