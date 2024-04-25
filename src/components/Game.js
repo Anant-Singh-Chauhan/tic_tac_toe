@@ -79,6 +79,8 @@ export default function Game() {
 
   const [gameTurns, setGameTurns] = useState([]);
 
+  const [disconnectedPlayer, setDisconnectedPlayer] = useState(undefined);
+
   useEffect(() => {
     console.log("refreshing...");
     ///
@@ -91,11 +93,12 @@ export default function Game() {
 
     ///
     /// handle player disconnection
+    ///
     socketClient.on("player-disconnected", (disconnectedPlayer) => {
       console.log(
         `Player disconnected, Name : ${disconnectedPlayer["playerName"]} from room : ${disconnectedPlayer["roomId"]}`
       );
-      resetRemoteContext();
+      setDisconnectedPlayer(disconnectedPlayer);
     });
   }, []);
 
@@ -153,11 +156,6 @@ export default function Game() {
     updatePlayer: updatePlayer,
   };
 
-  // game context value
-  const ctxValueGame = {
-    gameTurns: gameTurns,
-    updateGameTurns: setGameTurns,
-  };
   return (
     <div>
       {/* -- InfoBar -- */}
@@ -190,11 +188,10 @@ export default function Game() {
         {/* <GameContext.Provider value={ctxValueGame}> */}
         <div
           className={`gameBoard-gameOver ${
-            isLocal == true ||
-            winner != undefined ||
-            nativePlayer == players[activePlayer]
-              ? ""
-              : "disabled"
+            (winner == undefined && disconnectedPlayer == undefined && nativePlayer != undefined &&
+              nativePlayer != players[activePlayer]) 
+              ? "disabled"
+              : ""
           }`}
         >
           <GameBoard
@@ -202,8 +199,9 @@ export default function Game() {
             gameBoard={gameBoard}
           />
           {/* -- Game Over -- */}
-          {winner || isDraw ? (
+          {disconnectedPlayer || winner || isDraw ? (
             <GameOver
+              disconnectedPlayer={disconnectedPlayer}
               winner={players[winner]}
               onClickRematch={() => {
                 resetGameboard();
