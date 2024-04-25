@@ -2,13 +2,12 @@ import React, { useState, useContext, memo } from "react";
 import { PlayersContext } from "../store/players-context";
 
 const Player = memo(function Player({ symbol, isActive, isEditable = true }) {
-  const {players, updatePlayer} = useContext(PlayersContext);
+  const { players, updatePlayer } = useContext(PlayersContext);
   const [editState, setEditState] = useState(false);
   const [playerName, setName] = useState(players[symbol]);
 
-
   function toggleEditState() {
-    if (editState) updatePlayer(symbol,playerName);
+    if (editState) updatePlayer(symbol, playerName);
 
     setEditState((prevEdit) => !prevEdit);
   }
@@ -34,9 +33,11 @@ const Player = memo(function Player({ symbol, isActive, isEditable = true }) {
         <span className="player-symbol">{symbol}</span>
       </span>
 
-      {isEditable && <button className="editBtn" onClick={toggleEditState}>
-        {editState ? "Save" : "Edit"}
-      </button>}
+      {isEditable && (
+        <button className="editBtn" onClick={toggleEditState}>
+          {editState ? "Save" : "Edit"}
+        </button>
+      )}
     </div>
   );
 });

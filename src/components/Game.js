@@ -97,8 +97,6 @@ export default function Game() {
       );
       resetRemoteContext();
     });
-
-
   }, []);
 
   const activePlayer = deriveActivePlayer(gameTurns);
@@ -178,10 +176,10 @@ export default function Game() {
 
           {roomId != undefined && (
             <div className="remote-info">
-              <h3>
-                Room Id : {roomId}
-              </h3>
-                <p>Waiting for <strong>{players[activePlayer]}</strong>'s turn</p>
+              <h3>Room Id : {roomId}</h3>
+              <p>
+                Waiting for <strong>{players[activePlayer]}</strong>'s turn
+              </p>
             </div>
           )}
         </div>
@@ -192,7 +190,11 @@ export default function Game() {
         {/* <GameContext.Provider value={ctxValueGame}> */}
         <div
           className={`gameBoard-gameOver ${
-            nativePlayer == players[activePlayer] ? "disabled" : ""
+            isLocal == true ||
+            winner != undefined ||
+            nativePlayer == players[activePlayer]
+              ? ""
+              : "disabled"
           }`}
         >
           <GameBoard
@@ -203,7 +205,9 @@ export default function Game() {
           {winner || isDraw ? (
             <GameOver
               winner={players[winner]}
-              onClickRematch={resetGameboard}
+              onClickRematch={() => {
+                resetGameboard();
+              }}
             />
           ) : null}
         </div>

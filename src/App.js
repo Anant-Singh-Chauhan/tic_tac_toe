@@ -9,16 +9,11 @@ import RemoteMenu from "./components/RemoteMenu";
 import socketClient from "./socket/socket";
 
 function App() {
-
-
   const [isLocal, setIsLocal] = useState(undefined);
   const [connectionSuccess, setConnectionSuccess] = useState(undefined);
   const [roomId, setRoomId] = useState(undefined);
   const [remotePlayers, setRemotePlayers] = useState(undefined);
   const [nativePlayer, setNativePlayer] = useState(undefined);
-  const {resetRemoteContext} = useContext(RemoteContext);
-
- 
 
   const remoteContextValue = {
     isLocal: isLocal,

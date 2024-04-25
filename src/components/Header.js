@@ -3,7 +3,8 @@ import logo from "../assets/ttt_logo.webp";
 import { RemoteContext } from "../store/remote-context";
 
 const Header = memo(function Header() {
-  const { isLocal, updateIsLocal, resetRemoteContext } = useContext(RemoteContext);
+  const { isLocal, updateIsLocal, resetRemoteContext } =
+    useContext(RemoteContext);
   return (
     <header>
       <img src={logo} alt="ttt_img" className="header_img" />
@@ -13,7 +14,7 @@ const Header = memo(function Header() {
           className="editBtn"
           onClick={() => {
             isLocal && updateIsLocal(undefined);
-            isLocal === false &&  resetRemoteContext();
+            isLocal === false && resetRemoteContext();
           }}
         >
           Menu
