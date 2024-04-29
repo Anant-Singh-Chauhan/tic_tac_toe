@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { RemoteContext } from "../store/remote-context";
+import socketClient from "../socket/socket";
 
 export default function GameOver({
   disconnectedPlayer,
   winner,
   onClickRematch,
 }) {
-  const { updateIsLocal, resetRemoteContext } = useContext(RemoteContext);
+  const { isLocal, resetRemoteContext } = useContext(RemoteContext);
   return (
     <div className="gameOver-shell">
       <div className="gameOver-title">Game Over!</div>
@@ -18,7 +19,13 @@ export default function GameOver({
           : `${disconnectedPlayer["playerName"]} disconnected!`}
       </div>
       {disconnectedPlayer == undefined ? (
-        <button onClick={onClickRematch} className="gameOver-rematch">
+        <button
+          onClick={() => {
+            onClickRematch();
+            !isLocal && socketClient.emit("rematch-requested-to-server");
+          }}
+          className="gameOver-rematch"
+        >
           Rematch?
         </button>
       ) : null}

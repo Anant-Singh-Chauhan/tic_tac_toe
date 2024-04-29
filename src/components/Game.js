@@ -100,6 +100,15 @@ export default function Game() {
       );
       setDisconnectedPlayer(disconnectedPlayer);
     });
+
+    ///
+    /// handle remote-rematch-request
+    ///
+    socketClient.on("rematch-requested-to-client", (rematchPlayer) => {
+      if(!window.confirm(`${rematchPlayer["playerName"]} requested rematch!`)) {
+        resetRemoteContext();
+      } else resetGameboard();
+    });
   }, []);
 
   const activePlayer = deriveActivePlayer(gameTurns);
@@ -188,8 +197,10 @@ export default function Game() {
         {/* <GameContext.Provider value={ctxValueGame}> */}
         <div
           className={`gameBoard-gameOver ${
-            (winner == undefined && disconnectedPlayer == undefined && nativePlayer != undefined &&
-              nativePlayer != players[activePlayer]) 
+            winner == undefined &&
+            disconnectedPlayer == undefined &&
+            nativePlayer != undefined &&
+            nativePlayer != players[activePlayer]
               ? "disabled"
               : ""
           }`}
