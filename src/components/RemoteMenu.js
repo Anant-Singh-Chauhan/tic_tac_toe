@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { RemoteContext } from "../store/remote-context";
 import Switch from "react-switch";
 import socketClient from "../socket/socket";
@@ -8,14 +8,34 @@ const initialRoomId = "Enter Room ID";
 
 //
 export default function RemoteMenu() {
-  const { updateConnectionSuccess, updateRemoteRoomId, updateRemotePlayers, updateNativePlayer } =
-    useContext(RemoteContext);
+  const {
+    updateConnectionSuccess,
+    updateRemoteRoomId,
+    updateRemotePlayers,
+    updateNativePlayer,
+    updateRoomPlayId,
+    resetRemoteContext,
+  } = useContext(RemoteContext);
 
   const [playerName, setPlayerName] = useState("");
   const [roomId, setRoomId] = useState("");
 
   const [isPrivateRoom, setIsPrivateRoom] = useState(false);
   const [hasRoomId, setHasRoomId] = useState(false);
+
+  useEffect(() => {
+    // handle invalid room
+    socketClient.on("invalid-room", () => {
+      window.alert("INVALID ROOM!");
+      resetRemoteContext();
+    });
+
+    // handle full room
+    socketClient.on("room-full", () => {
+      window.alert("ROOM ALREADY FULL!");
+      resetRemoteContext();
+    });
+  }, []);
 
   //
   function togglePrivateRoom() {
@@ -48,10 +68,18 @@ export default function RemoteMenu() {
       if (!isPrivateRoom) {
         console.log("calling add random player");
         socketClient.emit("add-random-player", playerName);
+      } else {
+        console.log("calling add room player");
+        socketClient.emit("add-room-player", playerName, roomId);
       }
+
       updateConnectionSuccess(socketClient.active);
 
-      //
+      // handle remote room play
+      socketClient.on("room-game", (roomId) => {
+        updateRoomPlayId(roomId);
+      })
+
       // handle game start
       socketClient.on("emit-game-start", (gamePackage) => {
         console.log(`game started!`);
@@ -68,15 +96,6 @@ export default function RemoteMenu() {
 
         // updating players
         updateRemotePlayers(gamePackage["players"]);
-
-        // updating gameTurns
-
-        // console.log(gamePackage);
-
-        // // handle join
-        // socketClient.on("join",cb => {
-        //   cb("abcd");
-        // })
       });
     } catch (ex) {
       console.log(ex);
