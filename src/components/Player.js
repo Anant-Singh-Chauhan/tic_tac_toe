@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext, memo } from "react";
+import { PlayersContext } from "../store/players-context";
 
-export default function Player({ name, symbol, isActive, onSave }) {
+const Player = memo(function Player({ symbol, isActive, isEditable = true }) {
+  const { players, updatePlayer } = useContext(PlayersContext);
   const [editState, setEditState] = useState(false);
-  const [playerName, setName] = useState(name);
+  const [playerName, setName] = useState(players[symbol]);
 
   function toggleEditState() {
-    if (editState) onSave(symbol,playerName);
+    if (editState) updatePlayer(symbol, playerName);
 
-    // not a good practice, if state depends on prev state
-    // thats becoz react schedules state updates,
-    // it's not immidieate.
-    // setEditState(!editState);
     setEditState((prevEdit) => !prevEdit);
   }
 
@@ -34,9 +32,14 @@ export default function Player({ name, symbol, isActive, onSave }) {
 
         <span className="player-symbol">{symbol}</span>
       </span>
-      <button className="editBtn" onClick={toggleEditState}>
-        {editState ? "Save" : "Edit"}
-      </button>
+
+      {isEditable && (
+        <button className="editBtn" onClick={toggleEditState}>
+          {editState ? "Save" : "Edit"}
+        </button>
+      )}
     </div>
   );
-}
+});
+
+export default Player;
