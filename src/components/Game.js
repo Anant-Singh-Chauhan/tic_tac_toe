@@ -87,7 +87,7 @@ export default function Game() {
     /// refersh gameturns from remote
     ///
     socketClient.on("refresh-gameTurns", (updatedGameTurns) => {
-      console.log(updatedGameTurns);
+      // console.log(updatedGameTurns);
       setGameTurns(updatedGameTurns);
     });
 
@@ -143,7 +143,7 @@ export default function Game() {
       const updatedGameTurns = [inputGameObj, ...prevGameTurns];
 
       if (roomId != undefined) {
-        console.log("emiting update gt!");
+        // console.log("emiting update gt!");
         socketClient.emit("update-gameturns", updatedGameTurns, roomId);
       }
       return updatedGameTurns;

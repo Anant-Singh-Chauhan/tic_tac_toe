@@ -68,7 +68,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   min-width: 24rem;
-  column-gap: 0.5rem;
+  column-gap: 0.6rem;
 
   justify-content: space-evenly;
 }

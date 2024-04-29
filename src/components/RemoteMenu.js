@@ -71,7 +71,7 @@ export default function RemoteMenu() {
 
         // updating gameTurns
 
-        console.log(gamePackage);
+        // console.log(gamePackage);
 
         // // handle join
         // socketClient.on("join",cb => {

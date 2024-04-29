@@ -8,7 +8,7 @@ const socketClient = io(SERVER_URL, {
 });
 
 socketClient.on("connect", () => {
-  console.log(`Your Socket Id is : ${socketClient.id}`);
+  // console.log(`Your Socket Id is : ${socketClient.id}`);
 });
 
 export default socketClient;
