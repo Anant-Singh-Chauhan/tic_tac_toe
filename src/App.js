@@ -53,15 +53,18 @@ function App() {
         {isLocal === false &&
           connectionSuccess === true &&
           roomId == undefined && (
-            <ProgressBar
-              visible={true}
-              height="100"
-              width="100"
-              color="#4fa94d"
-              ariaLabel="progress-bar-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-            />
+            <div id="progressBar">
+              <ProgressBar
+                visible={true}
+                height="100"
+                width="100"
+                color="#4fa94d"
+                ariaLabel="progress-bar-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              
+              />
+            </div>
           )}
 
         {/* -- Remote Game -- */}
