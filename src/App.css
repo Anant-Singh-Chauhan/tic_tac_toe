@@ -155,7 +155,6 @@ header {
 
 .remote-form {
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 }
 
@@ -166,7 +165,6 @@ input.form-field  {
 
 .form-field,
 .form-submit {
-  /* margin: 0.75rem 1rem; */
   width: 65vw;
   max-width: 20rem;
 }
@@ -190,7 +188,6 @@ ol {
 .game-board,
 .gameOver-shell {
   background-color: #283618;
-  /* width: fit-content; */
   border-radius: 1rem;
   padding: clamp(1rem, 7vw, 2rem);
   list-style-type: none;
@@ -231,14 +228,13 @@ ol {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  /* align-items: stretch; */
-  /* height: 30rem; */
+  row-gap: 1rem;
 }
 
 /* ---- gameOver ---- */
 .gameBoard-gameOver {
-  height: 28rem;
   overflow-y: hidden;
+  position: relative;
 }
 
 .gameBoard-gameOver.disabled{
@@ -247,14 +243,14 @@ ol {
 
 .gameOver-shell {
   background-color: rgba(0, 0, 0, 0.9);
-  /* width: 24rem; */
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  top: -28rem;
+  position: absolute;
+  top: 0rem;
 }
 
 .gameOver-title {
