@@ -231,8 +231,8 @@ ol {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items: stretch;
-  height: 30rem;
+  /* align-items: stretch; */
+  /* height: 30rem; */
 }
 
 /* ---- gameOver ---- */
