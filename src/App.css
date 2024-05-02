@@ -2,12 +2,23 @@
 
 header,
 body {
-  min-width: 480px;
+  min-width: 360px;
   font-family: "Quicksand", sans-serif;
 }
 
 .App {
+  width: 100vw;
+  min-width: 360px;
   padding: 1rem 1rem;
+  transition: ease-in-out 100ms;
+
+}
+
+@media only screen and (max-width : 600px) {
+  .App{
+    padding: 1vh;
+    transition: ease-in-out 100ms;
+  }
 }
 
 /* ---- Header ---- */
@@ -24,13 +35,15 @@ header {
 }
 
 .header_img {
-  width: 10rem;
+  width: 10vw;
+  max-width: 150px;
+  min-width: 85px;
   mix-blend-mode: darken;
   transition: ease-in-out 200ms;
 }
 
 .header_img:hover {
-  width: 10.2rem;
+  width: 10.1vw;
 }
 
 /* ---- Menu ---- */
@@ -67,10 +80,10 @@ header {
 
   display: flex;
   flex-wrap: wrap;
-  min-width: 24rem;
   column-gap: 0.6rem;
 
   justify-content: space-evenly;
+  margin: 1rem;
 }
 
 .player,
@@ -83,6 +96,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.player{
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 1rem;
 }
 
 .remote-info{
@@ -172,21 +191,20 @@ ol {
 .gameOver-shell {
   background-color: #283618;
   /* width: fit-content; */
-  min-width: 24rem;
   border-radius: 1rem;
-  padding: 2rem 2rem;
+  padding: clamp(1rem, 7vw, 2rem);
   list-style-type: none;
 }
-
+  
 .game-board li {
   display: inline;
   vertical-align: middle;
 }
 
 .game-board button {
-  width: 7rem;
-  height: 7rem;
-  margin: 0.5rem 0.5rem;
+  width: clamp(5.2rem, 25vw, 7rem);
+  height: clamp(5.2rem, 25vw, 7rem);
+  margin: clamp(2px, 1vw, 0.5rem) clamp(2px, 1vw, 0.5rem);
   font-size: 50px;
   font-weight: 600;
 }
@@ -219,7 +237,7 @@ ol {
 
 /* ---- gameOver ---- */
 .gameBoard-gameOver {
-  height: 29rem;
+  height: 28rem;
   overflow-y: hidden;
 }
 
@@ -229,14 +247,14 @@ ol {
 
 .gameOver-shell {
   background-color: rgba(0, 0, 0, 0.9);
-  width: 24rem;
-  height: 24rem;
+  /* width: 24rem; */
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  top: -29rem;
+  top: -28rem;
 }
 
 .gameOver-title {
