@@ -204,6 +204,8 @@ ol {
   margin: clamp(2px, 1vw, 0.5rem) clamp(2px, 1vw, 0.5rem);
   font-size: 50px;
   font-weight: 600;
+  font-family: "Quicksand", sans-serif;
+
 }
 
 /* ---- Logger ---- */
