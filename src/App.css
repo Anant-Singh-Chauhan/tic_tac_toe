@@ -150,7 +150,6 @@ header {
 
 /* ---- Form Fields ---- */
 .remote-menu {
-  padding: 2rem 2rem;
 }
 
 .remote-form {
@@ -167,6 +166,7 @@ input.form-field  {
 .form-submit {
   width: 65vw;
   max-width: 20rem;
+  min-width: 240px;
 }
 
 .form-submit {
