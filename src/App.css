@@ -192,6 +192,10 @@ ol {
   padding: clamp(1rem, 7vw, 2rem);
   list-style-type: none;
 }
+
+.gameboard-row{
+  display: flex;
+}
   
 .game-board li {
   display: inline;
