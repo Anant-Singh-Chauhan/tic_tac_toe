@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { logClientInfo } from "./loggerService";
 import { RemoteContext } from "./store/remote-context";
 import { ProgressBar } from "react-loader-spinner";
 import Game from "./components/Game";
@@ -9,6 +10,10 @@ import RemoteMenu from "./components/RemoteMenu";
 import socketClient from "./socket/socket";
 
 function App() {
+  useEffect(() => {
+    logClientInfo("info", "TicTacToe accessed.");
+  }, []);
+
   const [isLocal, setIsLocal] = useState(undefined);
   const [connectionSuccess, setConnectionSuccess] = useState(undefined);
   const [roomPlayId, setRoomPlayId] = useState(undefined);
