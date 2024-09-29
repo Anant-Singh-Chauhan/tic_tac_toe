@@ -220,6 +220,7 @@ ol {
   min-width: 16rem;
   padding: 1rem 1rem;
   max-height: 20rem;
+  max-width: 25rem;
   overflow-y: auto;
 }
 
@@ -227,6 +228,67 @@ ol {
   display: block;
   transition: ease-in-out 200ms;
 }
+
+.logs_title_div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #283618;
+  padding-bottom: 0.5rem;
+  align-items: center;
+}
+
+/* ----- chat logger ----------- */
+
+#chat_and_playlogs{
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+#chat_logs, #play_logs, .logs_title_div, #send_chat{
+  margin-bottom: 0.5rem;
+}
+
+#play_logs.inactive, #chat_logs.inactive{
+  display: none;
+}
+
+#send_chat{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#send_chat_input{
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 3px;
+  
+}
+
+.btnLogs{
+  background-color: #dda15e;
+  color: white;
+  width: 4rem;
+  border-radius: 0.5rem;
+  padding: 0.35rem;
+}
+
+.btnLogs:hover{
+  background-color: #bc6c25;
+}
+
+.chat_player{
+  color: #283618;
+}
+
+#chat_logs>li{
+  max-width: 90%;
+  overflow-wrap: break-word;
+
+}
+
 
 /* ---- game-logger ---- */
 
