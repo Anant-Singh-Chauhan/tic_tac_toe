@@ -7,6 +7,7 @@ import Player from "./Player";
 import GameBoard from "./GameBoard";
 import GameOver from "./GameOver";
 import Logger from "./Logger";
+import ChatWindow from "./ChatWindow";
 
 import {
   SYMBOLS as PlayerSymbol,
@@ -105,7 +106,9 @@ export default function Game() {
     /// handle remote-rematch-request
     ///
     socketClient.on("rematch-requested-to-client", (rematchPlayer) => {
-      if(!window.confirm(`${rematchPlayer["playerName"]} requested rematch!`)) {
+      if (
+        !window.confirm(`${rematchPlayer["playerName"]} requested rematch!`)
+      ) {
         resetRemoteContext();
       } else resetGameboard();
     });
@@ -221,8 +224,13 @@ export default function Game() {
           ) : null}
         </div>
         {/* </GameContext.Provider> */}
-        {/* -- Logger -- */}
-        <Logger turns={gameTurns} />
+
+        <div id="chat_and_playlogs">
+          {/* -- Chat Window -- */}
+          {!isLocal && <ChatWindow />}
+          {/* -- Logger -- */}
+          <Logger turns={gameTurns} />
+        </div>
       </div>
     </div>
   );
