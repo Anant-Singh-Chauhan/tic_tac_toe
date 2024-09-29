@@ -25,6 +25,7 @@ Welcome to Tic Tac Toe! This is a simple and interactive app game built using Re
         *Remote* mode also has 2 sub modes: [ RANDOM and PRIVATE ROOM ]
         - **Random** : Allows users to play with random players online.
         - **Private Room** : Allows 2 players to connect  to a private room and enjoy friendly 1v1.
+- **Chat feautre**: For people who play more in chats (IYKYK)
 
 
 ## Installation
@@ -66,9 +67,15 @@ Mobile View
 - **Game**
 ![ss_localGame](./screenshots/ss_localGame.png)
 
+- **Chat Window**
+![image](https://github.com/user-attachments/assets/f0ad8a48-aaaf-436e-8039-bac1ae4f3c55)
+
+
 Web View
 
 ![ss_webView](./screenshots/ss_webView.png)
+
+
 
 
 For a live demo, visit https://anant-singh-chauhan.github.io/tic_tac_toe/.
